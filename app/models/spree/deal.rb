@@ -6,7 +6,7 @@ module Spree
     validates_presence_of :name, :product_id, :starts_at, :expires_at
     validate      :product_should_exist
 
-    before_create :duplicate_product
+    #before_create :duplicate_product
     after_create :enqueue_expiration_job
     after_save   :enqueue_start_job, :if => "starts_at_changed? and !active?"
 
@@ -86,4 +86,10 @@ module Spree
       self.product_id = prod.duplicate(:prefix => "Deal ").id
     end
   end
+  
+  private
+    def deals_params
+       params.require(:deal).permit(:name, :description, :product_id, :minimum_quantity, :starts_at, :expires_at)
+    end
+    
 end
