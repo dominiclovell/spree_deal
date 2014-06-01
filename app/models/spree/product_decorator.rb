@@ -1,6 +1,7 @@
 Spree::Product.class_eval do
   has_one :deal
-  has_one :active_deal, :conditions => ["spree_deals.state = 'active'"], :class_name => "Deal"
+  has_one :active_deal, where("spree_deals.state = 'active'"), :class_name => "Deal"
+  
   delegate_belongs_to :master, :list_price=, :list_price
 
   def deal_percent
