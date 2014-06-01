@@ -1,5 +1,5 @@
 module Spree
-  class DealsController < BaseController
+  class DealsController < Spree::StoreController
     respond_to :html
     HTTP_REFERER_REGEXP = /^https?:\/\/[^\/]+\/t\/([a-z0-9\-\/]+)$/
 
