@@ -10,7 +10,7 @@ module Spree
     after_create :enqueue_expiration_job
     after_save   :enqueue_start_job, :if => "starts_at_changed? and !active?"
 
-    scope :active, where(:state => "active")
+    scope :active, -> { where(state: 'active') }
     scope :for, lambda { |product| where(:product_id => product.try(:id)) }
 
     state_machine :initial => 'created', :use_transactions => false do
